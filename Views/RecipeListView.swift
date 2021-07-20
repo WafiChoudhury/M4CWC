@@ -9,8 +9,8 @@ import SwiftUI
 
 struct RecipeListView: View {
     
-    @ObservedObject var Model = RecipeModel()
-    
+    @EnvironmentObject var Model:RecipeModel
+
     var body: some View {
         
         NavigationView {
@@ -42,7 +42,7 @@ struct RecipeListView: View {
                 
                 
             }.navigationBarTitle("All Recipies")
-        }
+    }
     }
 
 

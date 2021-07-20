@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct RecipeTabView: View {
+    
+    @EnvironmentObject var Model:RecipeModel
+    
+    
     var body: some View {
         
         TabView{
         
-        Text("hey")
+        RecipeFeaturedView()
             .tabItem {
                 
                 VStack{
@@ -31,7 +35,7 @@ struct RecipeTabView: View {
                     Text("list")
                 }
             }
-        }
+        }.environmentObject(RecipeModel())
     }
 }
 
