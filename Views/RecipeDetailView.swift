@@ -34,9 +34,9 @@ VStack(alignment:.leading){
                     .font(.headline)
                     .padding([.bottom,.top ], 5)
 
-                ForEach (recipe.ingredients, id: \.self){ thing in
+                ForEach (recipe.ingredients){ thing in
                     
-                    Text("•" + thing)
+                    Text("•" + thing.name)
                     
                     
                 }
