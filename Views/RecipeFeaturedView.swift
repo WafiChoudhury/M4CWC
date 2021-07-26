@@ -11,6 +11,7 @@ struct RecipeFeaturedView: View {
     
     
     @EnvironmentObject var Model:RecipeModel
+    @State var isDetailViewShowing = false
     
     var body: some View {
 
@@ -31,24 +32,43 @@ struct RecipeFeaturedView: View {
                 
                 if(Model.recipes[index].featured==true){
                     
-                    ZStack {
+                    
+                    //Recipe Card Button
+                    
+                    Button(action: {
                         
+                        self.isDetailViewShowing = true
                         
-                        Rectangle()
-                            .foregroundColor(.white)
+                    }, label: {
                         
-                        VStack(spacing:0){
-                            Image(Model.recipes[index].image)
-                                .resizable()
-                                .clipped()
-                                .aspectRatio(contentMode: .fill)
-                            Text(Model.recipes[index].name)
-                                .padding(5)
+                        ZStack {
+                            
+                            
+                            Rectangle()
+                                .foregroundColor(.white)
+                            
+                            VStack(spacing:0){
+                                Image(Model.recipes[index].image)
+                                    .resizable()
+                                    .clipped()
+                                    .aspectRatio(contentMode: .fill)
+                                Text(Model.recipes[index].name)
+                                    .padding(5)
                                 
-                            
-                            
+                                
+                                
+                            }
                         }
-                    }.frame(width: geo.size.width-40, height: geo.size.height-100, alignment: .center)
+                        
+                    })
+                    .sheet(isPresented: $isDetailViewShowing ){
+                        
+                        RecipeDetailView(recipe: Model.recipes[index])
+                        
+                    }
+
+                    .buttonStyle(PlainButtonStyle())
+                    .frame(width: geo.size.width-40, height: geo.size.height-100, alignment: .center)
                     .cornerRadius(15)
                     .shadow(color: Color(.sRGB, red: 0, green: 0, blue: 0, opacity: 0.5),radius: 10,  x:-5, y:5)
 

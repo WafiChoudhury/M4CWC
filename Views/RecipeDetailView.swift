@@ -11,6 +11,8 @@ struct RecipeDetailView: View {
     
     var recipe:Recipe
     
+    @State var selectedServing = 2
+    
     
 var body: some View {
         
@@ -26,6 +28,23 @@ VStack(alignment:.leading){
                 .resizable()
                 .scaledToFit()
             
+            //MARK: Picker
+            
+            VStack(alignment:.leading){
+            
+            Text("Servings")
+                Picker("", selection: $selectedServing){
+                    
+                    Text("2").tag(2)
+                    Text("4").tag(4)
+                    Text("6").tag(6)
+                    Text("8").tag(8)
+
+                }.pickerStyle(SegmentedPickerStyle())
+                .frame(width:160)
+                
+                
+            }.padding()
             //MARK: Ingredients
             
             VStack(alignment:.leading){
@@ -36,7 +55,7 @@ VStack(alignment:.leading){
 
                 ForEach (recipe.ingredients){ thing in
                     
-                    Text("•" + thing.name)
+                    Text("•" + RecipeModel.getPortion(ingredient: thing, recipeServings: recipe.servings, targetServings: selectedServing) + " " + thing.name)
                     
                     
                 }
